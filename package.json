@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "Creation des API RESTful pour la gestion de recette",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Harouna Traore",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "mysql2": "^3.11.2",
+    "require": "^2.4.20"
   }
 }
