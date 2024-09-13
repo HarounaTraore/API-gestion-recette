@@ -1,0 +1,14 @@
+{
+  "name": "api-gestion-recette",
+  "version": "1.0.0",
+  "description": "Creation des API RESTful pour la gestion de recette",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Harouna Traore",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
