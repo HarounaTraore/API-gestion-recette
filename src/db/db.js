@@ -1,13 +1,16 @@
+import { config } from "dotenv";
 import { createPool } from "mysql2/promise";
+config();
 
-const pool = createPool({
-  host: "localhost",
-  user: "root",
-  password: "Thimbo",
-  database: "gestion_recette",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+export const pool = createPool({
+  host: process.env.HOST,
+  user: process.env.USE,
+  port: process.env.PORT,
+  password: process.env.PASSWORD,
+  database: process.env.dbNAME,
+  waitForConnections: process.env.WFC,
+  connectionLimit: parseInt(process.env.CL),
+  queueLimit: parseInt(process.env.QL),
 });
 
 const connection = async () => {
@@ -20,6 +23,3 @@ const connection = async () => {
     throw err;
   }
 };
-
-connection();
-export default { pool, connection };

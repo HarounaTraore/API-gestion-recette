@@ -5,13 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " nodemon index.js"
   },
   "author": "Harouna Traore",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "mysql2": "^3.11.2",
-    "require": "^2.4.20"
+    "nodemon": "^3.1.4",
+    "require": "^0.4.4"
   }
 }

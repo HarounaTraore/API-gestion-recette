@@ -1,16 +1,18 @@
-import { Router } from 'express';
+import { Router } from "express";
+import {
+  createRecette,
+  deleteRecette,
+  getRecettes,
+  updateRecette,
+} from "../controllers/recette.js";
 const router = Router();
-import { getRecettes, createRecette, updateRecette, deleteRecette } from '../controllers/recette';
 
-router.get('/recettes', getRecettes);
+router.get("/recettes", getRecettes);
 
+router.post("/recettes", createRecette);
 
-router.post('/recettes', createRecette);
+router.put("/recettes/:id", updateRecette);
 
-
-router.put('/recettes/:id', updateRecette);
-
-
-router.delete('/recettes/:id', deleteRecette);
+router.delete("/recettes/:id", deleteRecette);
 
 export default router;
