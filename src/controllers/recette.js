@@ -2,16 +2,14 @@ import { pool } from "../db/db.js";
 
 export default class Recette {
   // Fonction pour récupérer une recette
-  static async getElement(req, res) {
+  static async getElement(id) {
     try {
       const con = await pool.getConnection();
-      const { id } = req.params;
       const [result] = await con.execute(
         "SELECT * FROM recettes WHERE id = ?",
         [id]
       );
-      res.status(200).json(result);
-      return result;
+      return result.length;
     } catch (e) {
       throw e.message;
     }
@@ -80,4 +78,19 @@ export default class Recette {
       e;
     }
   }
+
+  static async checkRecette(titre) {
+    try {
+      const con = await pool.getConnection();
+      const [result] = await con.execute(
+        "SELECT * FROM recettes WHERE titre = ?",
+        [titre]
+      );
+      // res.status(200).json(result);
+      return result.length;
+    } catch (e) {
+      throw e.message;
+    }
+  }
+
 }

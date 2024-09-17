@@ -11,7 +11,15 @@ const addRequestValidator = [
 
     .isLength({ min: 3 })
     .withMessage("Minimun 3 caractère requis!")
-    .bail(),
+    .bail()
+
+    .custom(async (value, { req }) => {
+      const result = await Recette.checkRecette(value);
+      if (result !== 0) {
+        throw new Error("Deux recettes ne peuvent pas avoir même titre!");
+      }
+      return true;
+    }),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty())
@@ -28,13 +36,14 @@ const deleteRequestValidator = [
     .isEmpty()
     .withMessage("Id est obligatoire !")
     .bail()
-    .customSanitizer(async (value, { req }) => {
+    .custom(async (value, { req }) => {
       const result = await Recette.getElement(value);
       if (result == 0) {
         throw new Error("Cette recette n'existe pas!");
       }
       return true;
     }),
+
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty())
