@@ -1,96 +1,67 @@
-import { pool } from "../db/db.js";
+import RecetteModel from '../models/RecetteModel.js';
 
-export default class Recette {
-  // Fonction pour récupérer une recette
-  static async getElement(id) {
+
+export default class RecetteController {
+  static async getRecetteById(req, res) {
     try {
-      const con = await pool.getConnection();
-      const [result] = await con.execute(
-        "SELECT * FROM recettes WHERE id = ?",
-        [id]
-      );
-      return result.length;
+      const { id } = req.params;
+      const result = await RecetteModel.getElement(id);
+      if (result.length === 0) {
+        return res.status(404).json({ message: 'Recette non trouvée' });
+      }
+      res.json(result);
     } catch (e) {
-      throw e.message;
+      res.status(500).json({ message: e.message });
     }
   }
 
-  // Fonction pour récupérer les recettes
   static async getRecettes(req, res) {
-    const connection = await pool.getConnection();
-    const sql = "SELECT * FROM recettes";
     try {
-      const [results] = await connection.execute(sql);
+      const results = await RecetteModel.getAllRecettes();
       res.json(results);
     } catch (e) {
-      throw e;
-    } finally {
-      connection.release();
+      res.status(500).json({ message: e.message });
     }
   }
 
-  // Fonction pour créer une nouvelle recette
   static async createRecette(req, res) {
-    const connection = await pool.getConnection();
     try {
       const { titre, type, ingrédients } = req.body;
-      const sql =
-        "INSERT INTO recettes (titre, type, ingrédients) VALUES (?, ?, ?)";
-
-      const [result] = await connection.execute(sql, [
-        titre,
-        type,
-        ingrédients,
-      ]);
-      res.json({ message: "Recette ajoutée avec succès", id: result.insertId });
+      const insertId = await RecetteModel.createRecette(titre, type, ingrédients);
+      res.status(201).json({ message: "Recette ajoutée avec succès", id: insertId });
     } catch (e) {
-      throw e;
-    } finally {
-      connection.release();
+      res.status(500).json({ message: e.message });
     }
   }
 
-  // Fonction pour mettre à jour une recette
   static async updateRecette(req, res) {
     try {
-      const connection = await pool.getConnection();
       const { id } = req.params;
       const { titre, type, ingrédients } = req.body;
-      const sql =
-        "UPDATE recettes SET titre = ?, type = ?, ingrédients = ? WHERE id = ?";
-      await connection.execute(sql, [titre, type, ingrédients, id]);
-
+      await RecetteModel.updateRecette(id, titre, type, ingrédients);
       res.json({ message: "Recette mise à jour avec succès" });
     } catch (e) {
-      throw e;
+      res.status(500).json({ message: e.message });
     }
   }
 
-  // Fonction pour supprimer une recette
   static async deleteRecette(req, res) {
     try {
-      const connection = await pool.getConnection();
       const { id } = req.params;
-      const sql = "DELETE FROM recettes WHERE id = ?";
-      await connection.execute(sql, [id]);
+      await RecetteModel.deleteRecette(id);
       res.json({ message: "Recette supprimée avec succès" });
     } catch (e) {
-      e;
+      res.status(500).json({ message: e.message });
     }
   }
 
-  static async checkRecette(titre) {
+  static async checkRecette(req, res) {
     try {
-      const con = await pool.getConnection();
-      const [result] = await con.execute(
-        "SELECT * FROM recettes WHERE titre = ?",
-        [titre]
-      );
-      // res.status(200).json(result);
-      return result.length;
+      const { titre } = req.body;
+      const exists = await RecetteModel.checkRecette(titre);
+      res.json({ exists });
     } catch (e) {
-      throw e.message;
+      res.status(500).json({ message: e.message });
     }
   }
-
 }
