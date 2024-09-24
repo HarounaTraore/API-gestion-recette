@@ -11,8 +11,8 @@ export default class RecetteController {
       res.json(result);
     } catch (e) {
       res.status(500).json({ message: e.message });
-      }
-      next();
+    }
+    next();
   }
 
   static async getRecettes(req, res, next) {
@@ -20,28 +20,21 @@ export default class RecetteController {
       const results = await RecetteModel.getAllRecettes();
       res.json(results);
     } catch (e) {
-      console.log(e.message)
-      }
-      next();
+      console.log(e.message);
     }
-    
-    static async createRecette(req, res, next) {
-        try {
-          const { titre, type, ingrédients } = req.body;
-          await RecetteModel.createRecette(
-            titre,
-            type,
-            ingrédients,
-          );
-          res
-            .status(201)
-            .json("Recette ajoutée avec succès");
-        } catch (e) {
-          console.log(e.message);
-        }
-        next()
-      }
+    next();
+  }
 
+  static async createRecette(req, res, next) {
+    try {
+      const { titre, type, ingrédients } = req.body;
+      await RecetteModel.createRecette(titre, type, ingrédients);
+      res.status(201).json("Recette ajoutée avec succès");
+    } catch (e) {
+      console.log(e.message);
+    }
+    next();
+  }
 
   static async updateRecette(req, res, next) {
     try {
@@ -62,9 +55,7 @@ export default class RecetteController {
       res.json({ message: "Recette supprimée avec succès" });
     } catch (e) {
       res.status(500).json({ message: e.message });
-      }
-      next();
     }
-
-
+    next();
+  }
 }

@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: recette-api
+    env_file: .env
+    ports:
+      - "3308:3005" # Port d'accès de l'application
+    depends_on:
+      - db
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
+  db:
+    image: mysql:8
+    restart: always
+    container_name: gestion-recette
+    env_file: .env
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+    ports:
+      - "3307:3306" # Port de MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+
+volumes:
+  db-config:
+  db-data:

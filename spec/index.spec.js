@@ -12,8 +12,7 @@ describe("Recette tests", () => {
     );
 
     recetteId = result.insertId;
-    expect(result).toEqual(true)
-
+    expect(result).toEqual(true);
   });
 
   //   // Test de mise à jour d'une recette

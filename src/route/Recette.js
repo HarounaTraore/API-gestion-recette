@@ -12,8 +12,16 @@ router.get("/recettes", RecetteController.getRecettes);
 
 router.post("/recettes", addRequestValidator, RecetteController.createRecette);
 
-router.put("/recettes/:id", updateRequestValidator, RecetteController.updateRecette);
+router.put(
+  "/recettes/:id",
+  updateRequestValidator,
+  RecetteController.updateRecette,
+);
 
-router.delete("/recettes/:id", deleteRequestValidator, RecetteController.deleteRecette);
+router.delete(
+  "/recettes/:id",
+  deleteRequestValidator,
+  RecetteController.deleteRecette,
+);
 
 export default router;

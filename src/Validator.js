@@ -2,7 +2,6 @@ import { check, param, validationResult } from "express-validator";
 import { StatusCodes } from "http-status-codes";
 import RecetteModel from "./models/RecetteModel.js";
 
-
 const addRequestValidator = [
   check("titre")
     .not()
@@ -15,8 +14,7 @@ const addRequestValidator = [
     .bail()
 
     .custom(async (value) => {
-      const result = await RecetteModel
-      .checkRecette(value);
+      const result = await RecetteModel.checkRecette(value);
       if (result !== 0) {
         throw new Error("Deux recettes ne peuvent pas avoir même titre!");
       }
@@ -38,8 +36,7 @@ const updateRequestValidator = [
     .withMessage("Id est requis!")
     .bail()
     .custom(async (value) => {
-      const result = await RecetteModel
-      .getById(value);
+      const result = await RecetteModel.getById(value);
       if (result === 0) {
         throw new Error("Cette recette n'existe pas!");
       }
@@ -89,8 +86,7 @@ const deleteRequestValidator = [
     .withMessage("Id est obligatoire !")
     .bail()
     .custom(async (value) => {
-      const result = await RecetteModel
-      .getById(value);
+      const result = await RecetteModel.getById(value);
       if (result == 0) {
         throw new Error("Cette recette n'existe pas!");
       }
