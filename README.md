@@ -126,7 +126,7 @@ Pour effectuer des testes unitaires exécutez la commande suivante :
   npm test
 ```
 
-## 
+##
 
 ## Auteur
 
