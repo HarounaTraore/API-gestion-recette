@@ -2,7 +2,7 @@ import express from "express";
 import recettesRouter from "./src/route/Recette.js";
 
 const app = express();
-app.use(express.json()); 
+app.use(express.json());
 
 app.use("/", recettesRouter);
 

@@ -6,7 +6,7 @@ export default class RecetteModel {
       const con = await pool.getConnection();
       const [result] = await con.execute(
         "SELECT * FROM recettes WHERE id = ?",
-        [id]
+        [id],
       );
       con.release();
       return result;
@@ -33,7 +33,11 @@ export default class RecetteModel {
     try {
       const sql =
         "INSERT INTO recettes (titre, type, ingrédients) VALUES (?, ?, ?)";
-      const [result] = await connection.execute(sql, [titre, type, ingrédients]);
+      const [result] = await connection.execute(sql, [
+        titre,
+        type,
+        ingrédients,
+      ]);
       connection.release();
       return result.insertId;
     } catch (e) {
@@ -72,7 +76,7 @@ export default class RecetteModel {
     try {
       const [result] = await connection.execute(
         "SELECT * FROM recettes WHERE titre = ?",
-        [titre]
+        [titre],
       );
       connection.release();
       return result.length > 0;

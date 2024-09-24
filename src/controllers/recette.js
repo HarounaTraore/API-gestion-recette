@@ -1,5 +1,4 @@
-import RecetteModel from '../models/RecetteModel.js';
-
+import RecetteModel from "../models/RecetteModel.js";
 
 export default class RecetteController {
   static async getRecetteById(req, res) {
@@ -7,7 +6,7 @@ export default class RecetteController {
       const { id } = req.params;
       const result = await RecetteModel.getElement(id);
       if (result.length === 0) {
-        return res.status(404).json({ message: 'Recette non trouvée' });
+        return res.status(404).json({ message: "Recette non trouvée" });
       }
       res.json(result);
     } catch (e) {
@@ -27,8 +26,14 @@ export default class RecetteController {
   static async createRecette(req, res) {
     try {
       const { titre, type, ingrédients } = req.body;
-      const insertId = await RecetteModel.createRecette(titre, type, ingrédients);
-      res.status(201).json({ message: "Recette ajoutée avec succès", id: insertId });
+      const insertId = await RecetteModel.createRecette(
+        titre,
+        type,
+        ingrédients,
+      );
+      res
+        .status(201)
+        .json({ message: "Recette ajoutée avec succès", id: insertId });
     } catch (e) {
       res.status(500).json({ message: e.message });
     }

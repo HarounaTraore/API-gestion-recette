@@ -6,12 +6,12 @@ config();
 export const pool = createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  port: process.env.DB_PORT || 3306, 
+  port: process.env.DB_PORT || 3306,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  waitForConnections: process.env.WFC === 'true',  
-  connectionLimit: parseInt(process.env.CL) || 10, 
-  queueLimit: parseInt(process.env.QL) || 0 
+  waitForConnections: process.env.WFC === "true",
+  connectionLimit: parseInt(process.env.CL) || 10,
+  queueLimit: parseInt(process.env.QL) || 0,
 });
 
 const connection = async () => {
