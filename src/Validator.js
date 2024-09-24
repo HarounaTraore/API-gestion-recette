@@ -14,7 +14,7 @@ const addRequestValidator = [
     .withMessage("Minimun 3 caractère requis!")
     .bail()
 
-    .custom(async (value, { req }) => {
+    .custom(async (value) => {
       const result = await RecetteModel
       .checkRecette(value);
       if (result !== 0) {
@@ -37,7 +37,7 @@ const updateRequestValidator = [
     .notEmpty()
     .withMessage("Id est requis!")
     .bail()
-    .custom(async (value, { req }) => {
+    .custom(async (value) => {
       const result = await RecetteModel
       .getById(value);
       if (result === 0) {
@@ -52,7 +52,7 @@ const updateRequestValidator = [
     .isLength({ min: 6 })
     .withMessage("Minimum 6 caractères requis!")
     .bail()
-    .custom(async (value, { req }) => {
+    .custom(async (value) => {
       const result = await RecetteModel.checkRecette(value);
       if (result !== 0) {
         throw new Error("Cette recette existe déjà!");
@@ -88,7 +88,7 @@ const deleteRequestValidator = [
     .isEmpty()
     .withMessage("Id est obligatoire !")
     .bail()
-    .custom(async (value, { req }) => {
+    .custom(async (value) => {
       const result = await RecetteModel
       .getById(value);
       if (result == 0) {
