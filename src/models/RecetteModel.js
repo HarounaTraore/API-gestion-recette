@@ -2,17 +2,15 @@ import { pool } from "../db/db.js";
 
 export default class RecetteModel {
   static async getById(id) {
-    try {
+   
       const con = await pool.getConnection();
       const [result] = await con.execute(
         "SELECT * FROM recettes WHERE id = ?",
         [id],
       );
-      con.release();
-      return result;
-    } catch (e) {
-      throw new Error(e.message);
-    }
+      
+      return result.length;
+    
   }
 
   static async getAllRecettes() {
@@ -30,41 +28,34 @@ export default class RecetteModel {
 
   static async createRecette(titre, type, ingrédients) {
     const connection = await pool.getConnection();
-    try {
       const sql =
         "INSERT INTO recettes (titre, type, ingrédients) VALUES (?, ?, ?)";
-      const [result] = await connection.execute(sql, [
+       await connection.execute(sql, [
         titre,
         type,
         ingrédients,
       ]);
-      connection.release();
-      return result;
-    } catch (e) {
-      connection.release();
-      throw new Error(e.message);
-    }
+      return true;
   }
 
   static async updateRecette(id, titre, type, ingredients) {
     const connection = await pool.getConnection();
-    try {
-      const sql = "UPDATE recettes SET titre = ?, type = ?, ingrédients = ? WHERE id = ?";
-      const [result] = await connection.execute(sql, [titre, type, ingredients, id]);
-      return result; 
-    } catch (error) {
-      throw error;
-    } finally {
-      connection.release();
-    }
+      const sql =
+        "UPDATE recettes SET titre = ?, type = ?, ingrédients = ? WHERE id = ?";
+       await connection.execute(sql, [
+        titre,
+        type,
+        ingredients,
+        id,
+      ]);
+      return true;
   }
-  
 
   static async deleteRecette(id) {
     const connection = await pool.getConnection();
     try {
       const sql = "DELETE FROM recettes WHERE id = ?";
-     const [result] =  await connection.execute(sql, [id]);
+      const [result] = await connection.execute(sql, [id]);
       connection.release();
       return result;
     } catch (e) {
@@ -75,16 +66,11 @@ export default class RecetteModel {
 
   static async checkRecette(titre) {
     const connection = await pool.getConnection();
-    try {
       const [result] = await connection.execute(
         "SELECT * FROM recettes WHERE titre = ?",
         [titre],
       );
-      connection.release();
-      return result.length > 0;
-    } catch (e) {
-      connection.release();
-      throw new Error(e.message);
-    }
+      return result.length;
   }
 }
+
