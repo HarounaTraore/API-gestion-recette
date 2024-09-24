@@ -36,7 +36,7 @@ const updateRequestValidator = [
     .withMessage("Id est requis!")
     .bail()
     .custom(async (value, { req }) => {
-      const result = await Recette.getElement(value);
+      const result = await Recette.getById(value);
       if (result === 0) {
         throw new Error("Cette recette n'existe pas!");
       }
@@ -86,7 +86,7 @@ const deleteRequestValidator = [
     .withMessage("Id est obligatoire !")
     .bail()
     .custom(async (value, { req }) => {
-      const result = await Recette.getElement(value);
+      const result = await Recette.getById(value);
       if (result == 0) {
         throw new Error("Cette recette n'existe pas!");
       }
