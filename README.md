@@ -78,9 +78,7 @@ Pour démarrer l'application, exécutez la commande suivante :
 
 ```bash
 {
-  "titre": "Salade César",
-  "type": "Entrée",
-  "ingrédients": "Laitue, Poulet, Parmesan, Croutons"
+  "message": "Recette ajouter avec succès"
 }
 
 ```
@@ -119,6 +117,16 @@ Pour démarrer l'application, exécutez la commande suivante :
 }
 
 ```
+
+## les tests unitaires
+
+Pour effectuer des testes unitaires exécutez la commande suivante :
+
+```bash
+  npm test
+```
+
+## 
 
 ## Auteur
 
