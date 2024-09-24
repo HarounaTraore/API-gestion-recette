@@ -1,10 +1,10 @@
 import RecetteModel from "../models/RecetteModel.js";
 
 export default class RecetteController {
-  static async getRecetteById(req, res) {
+  static async getById(req, res) {
     try {
       const { id } = req.params;
-      const result = await RecetteModel.getElement(id);
+      const result = await RecetteModel.getById(id);
       if (result.length === 0) {
         return res.status(404).json({ message: "Recette non trouvée" });
       }

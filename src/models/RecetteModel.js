@@ -1,7 +1,7 @@
 import { pool } from "../db/db.js";
 
 export default class RecetteModel {
-  static async getElement(id) {
+  static async getById(id) {
     try {
       const con = await pool.getConnection();
       const [result] = await con.execute(
@@ -39,32 +39,34 @@ export default class RecetteModel {
         ingrédients,
       ]);
       connection.release();
-      return result.insertId;
+      return result;
     } catch (e) {
       connection.release();
       throw new Error(e.message);
     }
   }
 
-  static async updateRecette(id, titre, type, ingrédients) {
+  static async updateRecette(id, titre, type, ingredients) {
     const connection = await pool.getConnection();
     try {
-      const sql =
-        "UPDATE recettes SET titre = ?, type = ?, ingrédients = ? WHERE id = ?";
-      await connection.execute(sql, [titre, type, ingrédients, id]);
+      const sql = "UPDATE recettes SET titre = ?, type = ?, ingrédients = ? WHERE id = ?";
+      const [result] = await connection.execute(sql, [titre, type, ingredients, id]);
+      return result; 
+    } catch (error) {
+      throw error;
+    } finally {
       connection.release();
-    } catch (e) {
-      connection.release();
-      throw new Error(e.message);
     }
   }
+  
 
   static async deleteRecette(id) {
     const connection = await pool.getConnection();
     try {
       const sql = "DELETE FROM recettes WHERE id = ?";
-      await connection.execute(sql, [id]);
+     const [result] =  await connection.execute(sql, [id]);
       connection.release();
+      return result;
     } catch (e) {
       connection.release();
       throw new Error(e.message);
