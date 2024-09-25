@@ -1,40 +1,26 @@
-
 services:
   app:
     container_name: recette-api
-    build:
-      context: . # Construit l'image à partir du Dockerfile dans le répertoire actuel
-    depends_on:
-      db:
-        condition: service_started
-    environment:
-      DB_HOST: ${HOST}
-      DB_USER: ${USE}
-      DB_PASSWORD: ${PASSWORD}
-      DB_NAME: gestion_recette
+    image: recette
+    build: .
     ports:
-      - "3308:3005"
-    networks:
-      - default
+      - "3000:3000"
+    volumes:
+      - .:/usr/index
+    depends_on:
+      - db
 
   db:
-    container_name: gestion-recette
-    image: mysql:8
+    image: mysql
+    container_name: mysql
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "3307:3306"
-    volumes:
-      - db-config:/etc/mysql
-      - db-data:/var/lib/mysql
+      - "3308:3306"
     restart: always
-    networks:
-      - default
+    volumes:
+      - mysql-data:/var/lib/mysql
 
 volumes:
-  db-config:
-  db-data:
-
-networks:
-  default:
+  mysql-data:
