@@ -1,4 +1,3 @@
-
 # API de Gestion des Recettes
 
 ## Description
@@ -47,7 +46,7 @@ npm install
 
 1. Assurez-vous que **MySQL** est en cours d'exécution sur votre machine.
 2. Créez une base de données pour le projet (par exemple, `gestion_recette`).
-3. Modifiez le fichier `.env` pour y insérer les informations de connexion à la base de données.
+3. Modifiez le fichier `.env.exampl`en le nommant `.env` pour y insérer les informations de connexion à la base de données.
 
 Exemple de fichier `.env` :
 
@@ -60,13 +59,8 @@ DB_NAME=gestion_recette
 
 ## Utilisation
 
-Pour démarrer l'application en mode développement :
 
-```bash
-npm run dev
-```
-
-Pour démarrer l'application en mode production :
+Pour démarrer l'application :
 
 ```bash
 npm start
@@ -178,16 +172,13 @@ Ce projet utilise **Docker** pour la containerisation, ce qui permet de déploye
 
 ### Instructions pour Docker :
 
-
 1. **Lien vers l'image DockerHub** : [ lien image](https://hub.docker.com/r/harounatraore/recette)
-
 
 2. **Lancer les conteneurs Docker** :
 
    ```bash
    docker-compose up -d
    ```
-
 
 ## Documentation et Collection Postman
 
