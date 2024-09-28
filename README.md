@@ -184,7 +184,7 @@ Ce projet utilise **Docker** pour la containerisation, ce qui permet de déploye
 2. **Lancer les conteneurs Docker** :
 
    ```bash
-   docker-compose up -d
+    docker-compose up -d
    ```
 
 ## Documentation et Collection Postman
