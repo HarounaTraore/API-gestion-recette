@@ -4,7 +4,11 @@ describe("Recette tests", () => {
   let recetteId = null;
 
   it("can be created", async () => {
-    const recette = { titre: "crepe", type: "dessert", ingredients: "farine" };
+    const recette = {
+      titre: "crepe",
+      type: "dessert",
+      ingredients: "farine",
+    };
     const result = await Recette.createRecette(
       recette.titre,
       recette.type,
@@ -12,28 +16,44 @@ describe("Recette tests", () => {
     );
 
     recetteId = result.insertId;
-    expect(result).toEqual(true);
+    expect(result).not.toBe(null);
   });
 
-  //   // Test de mise à jour d'une recette
   it("can be updated", async () => {
     const updatedRecette = {
       titre: "gâteau",
       type: "dessert",
-      ingrédients: "farine, sucre",
+      ingredients: "farine, sucre",
     };
 
     const updateResult = await Recette.updateRecette(
-      6,
+      recetteId,
       updatedRecette.titre,
       updatedRecette.type,
-      updatedRecette.ingrédients,
+      updatedRecette.ingredients,
     );
 
-    expect(updateResult).toBe(true);
+    expect(updateResult.affectedRows).toBe(1);
   });
 
-  //   // Test de récupération de toutes les recettes
+  it("fails to update a recipe that does not exist", async () => {
+    const invalidId = 999999;
+    const updatedRecette = {
+      titre: "fake gâteau",
+      type: "dessert",
+      ingredients: "farine, sucre",
+    };
+
+    const updateResult = await Recette.updateRecette(
+      invalidId,
+      updatedRecette.titre,
+      updatedRecette.type,
+      updatedRecette.ingredients,
+    );
+
+    expect(updateResult.affectedRows).toBe(0);
+  });
+
   it("can get all recipes", async () => {
     const allRecettes = await Recette.getAllRecettes();
 
@@ -41,10 +61,16 @@ describe("Recette tests", () => {
     expect(allRecettes.length).toBeGreaterThan(0);
   });
 
-  // Test de suppression d'une recette
   it("can be deleted", async () => {
-    const result = await Recette.deleteRecette(8);
+    const result = await Recette.deleteRecette(recetteId);
 
     expect(result.affectedRows).toEqual(1);
+  });
+
+  it("fails to delete a recipe that does not exist", async () => {
+    const invalidId = 999999;
+    const deleteResult = await Recette.deleteRecette(invalidId);
+
+    expect(deleteResult.affectedRows).toBe(0);
   });
 });

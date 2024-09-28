@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3010
 
-CMD ["npm", "start"]
+CMD ["npm", "start", "npm test", "npm run lint", " npm run format"]

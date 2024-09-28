@@ -27,8 +27,8 @@ export default class RecetteController {
 
   static async createRecette(req, res, next) {
     try {
-      const { titre, type, ingrédients } = req.body;
-      await RecetteModel.createRecette(titre, type, ingrédients);
+      const { titre, type, ingredients } = req.body;
+      await RecetteModel.createRecette(titre, type, ingredients);
       res.status(201).json("Recette ajoutée avec succès");
     } catch (e) {
       console.log(e.message);
@@ -39,8 +39,8 @@ export default class RecetteController {
   static async updateRecette(req, res, next) {
     try {
       const id = req.params.id;
-      const { titre, type, ingrédients } = req.body;
-      await RecetteModel.updateRecette(id, titre, type, ingrédients);
+      const { titre, type, ingredients } = req.body;
+      await RecetteModel.updateRecette(id, titre, type, ingredients);
       res.json("Recette mise à jour avec succès");
     } catch (e) {
       res.status(500).json({ message: e.message });

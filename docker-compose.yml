@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: recette-api
+    container_name: recettes
     image: recette
     build: .
     ports:
@@ -12,7 +12,7 @@ services:
 
   db:
     image: mysql
-    container_name: mysql
+    container_name: recette_mysql
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}

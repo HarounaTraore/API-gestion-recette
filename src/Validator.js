@@ -56,7 +56,7 @@ const updateRequestValidator = [
       }
       return true;
     }),
-  check("ingrédients")
+  check("ingredients")
     .notEmpty()
     .withMessage("Ingredients ne peut pas être vide!")
     .bail()
