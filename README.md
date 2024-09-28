@@ -46,15 +46,23 @@ npm install
 
 1. Assurez-vous que **MySQL** est en cours d'exécution sur votre machine.
 2. Créez une base de données pour le projet (par exemple, `gestion_recette`).
-3. Modifiez le fichier `.env.exampl`en le nommant `.env` pour y insérer les informations de connexion à la base de données.
+3. Modifiez le fichier `.env.exampl`en le nommant `.env` pour y insérer les informations de connexion à la base de données, ces modifications sont valables pour le fichier `.env.test.exampl` pour l'utilisation de l'image docker.
 
 Exemple de fichier `.env` :
 
 ```bash
 DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=motdepasse
-DB_NAME=gestion_recette
+DB_USER=USER
+DB_PASSWORD=PASSWORD
+DB_NAME=NAME_DB
+DB_PORT=PORT
+WFC=true
+CL=10
+QL=0
+
+MYSQL_ROOT_USER=USER
+MYSQL_ROOT_PASSWORD=PASSWORD
+MYSQL_DATABASE=NAME_DB
 ```
 
 ## Utilisation

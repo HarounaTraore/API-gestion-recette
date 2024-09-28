@@ -9,7 +9,7 @@ export const pool = createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   waitForConnections: process.env.WFC === "true",
-  connectionLimit: parseInt(process.env.CL) || 10,
+  connectionLimit: false,
   queueLimit: parseInt(process.env.QL) || 0,
 });
 
