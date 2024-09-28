@@ -33,7 +33,7 @@ git clone https://github.com/HarounaTraore/API-gestion-recette.git
 **Accédez au dossier du projet :**
 
 ```bash
-cd order-manager-app
+cd API-gestion-recette
 ```
 
 **Installez les dépendances :**
