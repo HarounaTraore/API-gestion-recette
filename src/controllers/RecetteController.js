@@ -20,7 +20,7 @@ export default class RecetteController {
       const results = await RecetteModel.getAllRecettes();
       res.json(results);
     } catch (e) {
-      console.log(e.message);
+      res.json({ message: e.message });
     }
     next();
   }
@@ -31,7 +31,7 @@ export default class RecetteController {
       await RecetteModel.createRecette(titre, type, ingredients);
       res.status(201).json("Recette ajoutée avec succès");
     } catch (e) {
-      console.log(e.message);
+      res.json({ message: e.message });
     }
     next();
   }

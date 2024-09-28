@@ -46,7 +46,7 @@ const updateRequestValidator = [
     .notEmpty()
     .withMessage("Titre ne doit pas être vide")
     .bail()
-    .isLength({ min: 6 })
+    .isLength({ min: 3 })
     .withMessage("Minimum 6 caractères requis!")
     .bail()
     .custom(async (value) => {

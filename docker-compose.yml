@@ -9,6 +9,8 @@ services:
       - .:/usr/index
     depends_on:
       - db
+    env_file:
+      - .env.test
 
   db:
     image: mysql
