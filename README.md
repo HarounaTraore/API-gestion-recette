@@ -45,7 +45,7 @@ npm install
 ## Configuration de la base de données
 
 1. Assurez-vous que **MySQL** est en cours d'exécution sur votre machine.
-2. Créez une base de données pour le projet (par exemple, `gestion_recette`).
+2. Créez une base de données pour le projet (par exemple, `gestion_recettes`).
 3. Modifiez le fichier `.env.exampl`en le nommant `.env` pour y insérer les informations de connexion à la base de données, ces modifications sont valables pour le fichier `.env.test.exampl` pour l'utilisation de l'image docker.
 
 Exemple de fichier `.env` :
@@ -88,7 +88,7 @@ L'API sera accessible à `http://localhost:3000`.
     "id": 1,
     "titre": "Tarte aux pommes",
     "type": "Dessert",
-    "ingrédients": "Pommes, Sucre, Pâte"
+    "ingredients": "Pommes, Sucre, Pâte"
   }
 ]
 ```
@@ -102,7 +102,7 @@ L'API sera accessible à `http://localhost:3000`.
 {
   "titre": "Salade César",
   "type": "Entrée",
-  "ingrédients": "Laitue, Poulet, Parmesan, Croutons"
+  "ingredients": "Laitue, Poulet, Parmesan, Croutons"
 }
 ```
 
@@ -123,7 +123,7 @@ L'API sera accessible à `http://localhost:3000`.
 {
   "titre": "Pizza améliorée",
   "type": "Plat principal",
-  "ingrédients": "Tomates, Fromage, Pâte, Basilic"
+  "ingredients": "Tomates, Fromage, Pâte, Basilic"
 }
 ```
 
@@ -186,12 +186,32 @@ Ce projet utilise **Docker** pour la containerisation, ce qui permet de déploye
    ```bash
     docker-compose up -d
    ```
+3. **Connexion au service MySQL** :
+   
+    ```bash
+    docker exec -it recette_mysql mysql -u root -p
+   ```
+
+4. **Créer la base de données et les tables** :
+
+ ```sql
+    CREATE DATABASE IF NOT EXISTS gestion_recettes;
+    USE gestion_recettes;
+
+    
+    CREATE TABLE IF NOT EXISTS recettes (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       titre VARCHAR(255) NOT NULL,
+       type VARCHAR(50) NOT NULL,
+       ingredients VARCHAR(255) NOT NULL
+    );
+```
 
 ## Documentation et Collection Postman
 
 Pour tester les différents endpoints de l'API, vous pouvez utiliser la collection Postman incluse dans ce projet. Elle contient toutes les requêtes configurées pour interagir avec l'API.
 
-- **Exporter la collection** : `gestion-recette-API.postman_collection.json`
+- **Exporter la collection** : `recettes_collection.json`
 - **Importer dans Postman** et exécuter les requêtes.
 
 ## Auteur
