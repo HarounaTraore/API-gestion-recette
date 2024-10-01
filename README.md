@@ -186,25 +186,26 @@ Ce projet utilise **Docker** pour la containerisation, ce qui permet de déploye
    ```bash
     docker-compose up -d
    ```
+
 3. **Connexion au service MySQL** :
-   
-    ```bash
-    docker exec -it recette_mysql mysql -u root -p
+
+   ```bash
+   docker exec -it recette_mysql mysql -u root -p
    ```
 
 4. **Créer la base de données et les tables** :
 
- ```sql
-    CREATE DATABASE IF NOT EXISTS gestion_recettes;
-    USE gestion_recettes;
+```sql
+   CREATE DATABASE IF NOT EXISTS gestion_recettes;
+   USE gestion_recettes;
 
-    
-    CREATE TABLE IF NOT EXISTS recettes (
-       id INT AUTO_INCREMENT PRIMARY KEY,
-       titre VARCHAR(255) NOT NULL,
-       type VARCHAR(50) NOT NULL,
-       ingredients VARCHAR(255) NOT NULL
-    );
+
+   CREATE TABLE IF NOT EXISTS recettes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      titre VARCHAR(255) NOT NULL,
+      type VARCHAR(50) NOT NULL,
+      ingredients VARCHAR(255) NOT NULL
+   );
 ```
 
 ## Documentation et Collection Postman

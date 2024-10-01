@@ -3,12 +3,15 @@ import RecetteController from "../controllers/RecetteController.js";
 import {
   addRequestValidator,
   deleteRequestValidator,
+  getByIdRequestValidator,
   updateRequestValidator,
 } from "../Validator.js";
+import RecetteModel from "../models/RecetteModel.js";
 
 const router = Router();
 
 router.get("/recettes", RecetteController.getRecettes);
+router.get("/recettes/:id", getByIdRequestValidator, RecetteController.getById);
 
 router.post("/recettes", addRequestValidator, RecetteController.createRecette);
 

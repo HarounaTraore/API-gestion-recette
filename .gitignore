@@ -1,7 +1,3 @@
 node_modules
-*.sql
 .env
 .env.test
-
-
-docker-compose.test.yml

@@ -7,7 +7,7 @@ export default class RecetteModel {
       id,
     ]);
 
-    return result.length;
+    return result;
   }
 
   static async getAllRecettes() {
